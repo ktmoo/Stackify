@@ -2,5 +2,12 @@
 
 Note: This is still under development
 
-- A Quora clone built with Django and HTMX.
-- Includes user authentication, question and answer creation, voting, and search.
+This project contains the code for Stackify, a basic Quora clone built using Django web framework. The purpose of this project is for me to learn intermediate level Django concepts and practice building a knowledge sharing application. Features include:
+
+User authentication system using Django's builtin auth.
+Adding,Upadating and deleting posts.
+Adding friends and creating Groups
+Search and filter posts.
+Upvoting of posts.
+
+Any contributions or feedback are welcome!
