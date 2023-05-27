@@ -1,0 +1,27 @@
+{% extends 'user/base.html' %}
+{% load static %}  
+{% block content %}
+<link rel="stylesheet" href="{% static 'style.css' %}" type="text/css">
+<ol class="breadcrumb mt-3">
+    <li class="breadcrumb-item">
+    <a href="{% url 'home_page' %}">Home</a> </li>
+    <li class="breadcrumb-item">
+    <a href="{% url 'posts' %}">Posts</a>
+    </li>
+</ol>
+<div class="container">
+    <h1>Posts</h1>
+    <div class="post-list">
+        {% for post in posts%}
+        <div class="post-card">
+            <div class="post-content">
+            <h3 class="post-title">{{post.title}}</h3>
+            <p class="author"><a class="link" href="{% url 'profile_page' username=post.author_id.username %}">{{post.author_id.username}}</a></p>
+            <p class="post-excerpt">{{post.excerpt}}</p>   
+            </div>
+            <a class="btn-read" href="{% url 'post' slug=post.slug %}">Read More ...</a>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock%}
