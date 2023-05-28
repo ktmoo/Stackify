@@ -5,12 +5,13 @@ from django.core.exceptions import ValidationError
 class PostForm(forms.ModelForm):
     class Meta:
         model= Post
-        fields=["title","content","tags"]
+        fields=["title","content",'image',"tags"]
 
         widgets={
             "title": forms.TextInput(attrs={'class': "form-control"}),
             "tags": forms.TextInput(attrs={'class': "form-control"}),
             "content": forms.Textarea(attrs={'class': "form-control","width": "100%"}),
+            "image":forms.FileInput(attrs={'class': 'form-control-file'})
         }
 
     def clean(self):
@@ -32,4 +33,3 @@ class CommentsForm(forms.ModelForm):
     def clean(self):
         cleaned_data=self.cleaned_data
         return cleaned_data
-
