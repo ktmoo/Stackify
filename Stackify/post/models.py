@@ -8,6 +8,7 @@ class Post(models.Model):
     title=models.CharField(max_length=100)
     slug=models.SlugField(max_length=50,blank=True,null=True)
     content=models.TextField()
+    image = models.ImageField(upload_to='uploads/post')
     tags=models.CharField(max_length=30)
     author_id=models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE,null=True,blank=True)
     date=models.DateField(auto_now_add=True)
@@ -39,3 +40,4 @@ class Comments(models.Model):
     author_id=models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE,null=True,blank=True)
     post=models.ForeignKey(Post, on_delete=models.CASCADE,null=True,blank=True)
     date=models.DateField(auto_now_add=True)
+
