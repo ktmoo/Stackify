@@ -6,7 +6,7 @@ This project contains the code for Stackify, a basic Quora clone built using Dja
 
 User authentication system using Django's builtin auth.
 Adding,Upadating and deleting posts.
-Adding friends and creating Groups
+Creating Groups.
 Search and filter posts.
 Upvoting of posts.
 
