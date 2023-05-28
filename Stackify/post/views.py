@@ -1,12 +1,11 @@
 from django.shortcuts import render,redirect,HttpResponseRedirect
 from django.urls import reverse
-from django.http import HttpResponseBadRequest,Http404
 from django.contrib.auth.decorators import login_required
 from user.models import CustomUser
 from django.db.models import Q
 from .forms import PostForm,CommentsForm
 from .models import Post,Comments
-
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 
 
@@ -23,20 +22,35 @@ def search_view(request):
 
 @login_required
 def create_a_post(request):
-    form=PostForm(request.POST or None)
     url=reverse('create_a_post')
-    if form.is_valid():
-        post=form.save(commit=False)
-        post.author_id=request.user
-        post.save()
+    if request.method=="POST":
+        form=PostForm(request.POST,request.FILES)
+        if form.is_valid():
+            post=form.save(commit=False)
+            post.author_id=request.user
+            post.save()
+            form=PostForm(None)
+            return redirect('posts')
+    else:
         form=PostForm(None)
-        return redirect('posts')
     context={"form": form, "url": url}
     return render(request,'post/create_post.html',context)
 
 def posts(request):
     posts=Post.objects.all()
-    return render(request,'post/posts.html',{"posts": posts})
+    p = Paginator(posts, 3)  
+    page_number = request.GET.get('page')
+    try:
+        page_obj = p.get_page(page_number)
+
+    except PageNotAnInteger:
+        page_obj = p.page(1)
+
+    except EmptyPage:
+         page_obj = p.get_page(p.num_pages)
+         
+    context = {'page_obj': page_obj}
+    return render(request, 'post/posts.html', context)
 
 def post(request, slug):
     try:
