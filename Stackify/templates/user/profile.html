@@ -1,16 +1,24 @@
 {% extends 'user/base.html' %}
 
 {% block content %}
-<h3>{{user.username}}</h3>
-<h4>Joined:<date>{{user.date_joined}}</date></h4>
-{% if user.bio %}
-<p>{{user.bio}}</p>
-{% endif %}
-<button type="submit" id="add" class="btn btn-primary">Add Friend</button>
+
+<div class="profile_card">
+     <img src="{{user.image.url}}" style="width:100%">
+     <h1>{{user.username}}</h1>
+     <h4>Joined:<date>{{user.date_joined}}</date></h4>
+     {% if user.bio %}
+     <p>{{user.bio}}</p>
+     {% endif %}
+     <h6>Number of Followers: {{user.num_followers}}</h6>
+     <a href="#"><i class="fa fa-twitter"></i></a>
+     <a href="#"><i class="fa fa-linkedin"></i></a>
+     <a href="#"><i class="fa fa-facebook"></i></a>
+     <button type="submit" id="add" class="button_follow">Follow</button>
+</div>
 <br>
 <script type="text/javascript">
      document.getElementById("add").onclick = function () {
-          location.href = "/";
+          location.href = "{% url 'follow' account=user.username %}";
       };
- </script>
+</script>
 {% endblock%}
