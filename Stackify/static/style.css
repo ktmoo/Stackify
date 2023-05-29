@@ -140,7 +140,7 @@
 }
 
 
-.card {
+.profile_card {
   padding: 20px;
   border-radius: 5px;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
@@ -154,16 +154,46 @@
   border-radius: 50%;
 }
 
-.card h2 {
+.profile_card h2 {
   margin-top: 0;
 }
 
-.card img {
+.profile_card img {
   width: 100%;
   height: auto;
   margin-bottom: 10px;
 }
 
-.card p {
+.profile_card p {
   margin-bottom: 0;
+}
+
+
+.profile_card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  max-width: 300px;
+  margin: auto;
+  text-align: center;
+}
+
+.title {
+  color: grey;
+  font-size: 18px;
+}
+
+.button_follow {
+  border: none;
+  outline: 0;
+  display: inline-block;
+  padding: 8px;
+  color: white;
+  background-color: #000;
+  text-align: center;
+  cursor: pointer;
+  width: 100%;
+  font-size: 18px;
+}
+
+.button_follow:hover {
+  opacity: 0.7;
 }
