@@ -22,12 +22,17 @@ class UserForm(forms.Form):
 
     bio=forms.CharField(label='Bio',max_length=250,
                     widget=forms.TextInput(attrs={'class': 'form-control'}))
+    
+    image = forms.ImageField(label='Image', required=False,  
+                         widget=forms.FileInput(attrs={
+    'class': 'form-control-file'}))
 
     def clean(self):
         cleaned_data=self.cleaned_data
-        password=cleaned_data['password']
-        username=self.cleaned_data['username']
-        cpassword=cleaned_data['cpassword']
+        print(cleaned_data)
+        username = self.data.get('username')  
+        password = self.data.get('password')
+        cpassword = self.data.get('cpassword')
         if cpassword!=password:
             raise ValidationError("Passwords dont match!")
         if CustomUser.objects.filter(username=username).exists():
