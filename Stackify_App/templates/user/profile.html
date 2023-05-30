@@ -1,0 +1,45 @@
+{% extends 'user/base.html' %}
+
+{% block content %}
+
+<div class="profile_card">
+     <img src="{{user.image.url}}" class="author-img">
+     <h1>{{user.username}}</h1>
+     <h4>Joined:<date>{{user.date_joined|date}}</date></h4>
+     {% if user.bio %}
+     <p>{{user.bio}}</p>
+     {% endif %}
+     <h6>Number of Followers: {{user.num_followers}}</h6>
+     {% if not user is request.user %}
+          {% if process %}
+          <button type="submit" id="add" class="button_follow">Follow</button>
+          {% else %}
+          <button type="submit" id="add" class="button_follow">UnFollow</button>
+          {% endif %}
+     {% endif %}
+</div>
+<div class="written_posts">
+     <table class="table table-striped table-hover">
+          <tr class="table-active table-dark">
+            <th>Posts Written</th>
+          </tr>
+          {% for post in user.posts_written.all %}
+          {% if post %}
+          <tr>
+            <td><a href="{% url 'post' slug=post.slug %}">{{post.title}}</a></td>
+          </tr>
+          {% endif %}
+          {% endfor%}
+     </table>
+
+<script type="text/javascript">
+     document.getElementById("add").onclick = function () {
+          if({{process}}===1){
+               location.href = "{% url 'follow' account=user.username %}";
+          }
+          else{
+               location.href = "{% url 'unfollow' account=user.username %}";
+          }
+      };
+</script>
+{% endblock%}

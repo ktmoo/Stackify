@@ -1,0 +1,17 @@
+{% extends 'user/base.html' %}
+
+{% block content %}
+<div class="h-100 d-flex align-items-center justify-content-center">
+  <form method="POST" action="{{url}}" class="form-group" enctype="multipart/form-data">
+    <ol class="breadcrumb mt-3">
+      <li class="breadcrumb-item">
+      <a href="/">Back to Home</a> </li>
+      </li>
+    </ol>
+    <h3>Create a Post </h3>
+    {% csrf_token %}
+    {{form.as_p}}
+    <button type="submit" class="btn btn-dark">Submit</button>
+  </form>
+</div>
+{% endblock%}

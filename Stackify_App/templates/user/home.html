@@ -1,0 +1,47 @@
+{% extends 'user/base.html' %}
+
+{% load static %}  
+{% block content %}
+<link rel="stylesheet" href="{% static 'style.css' %}" type="text/css">
+<br>
+<div class="articles">
+    <div class="latest">
+        <div class="card">
+            <h2>Latest Posts</h2>
+                {% for post in latest_post %}
+                    <div class="post_display">
+                        <h5>{{post.title}}</h5>
+                        <p>{{post.excerpt}}</p>
+                        <a href="{% url 'post' slug=post.slug %}">Read More ...</a>
+                    </div>
+                {% endfor %} 
+            <br>
+            <button class="btn btn-outline-success" id="Posts" type="submit">Explore Posts</button>
+       </div>
+    </div>
+
+    <div class="popular">
+        <div class="card">
+           <h2>Popular Posts</h2>
+                {% for post in most_upvotes %}
+                    <div class="post_display">
+                        <h5>{{post.title}}</h5>
+                        <p>{{post.excerpt}}</p>
+                        <a href="{% url 'post' slug=post.slug %}">Read More ...</a>
+                    </div>
+                {% endfor %}
+            <br>
+            <button class="btn btn-outline-success" id="Create" type="submit">Create a Post</button>
+       </div>
+       
+    </div>
+</div>
+<script type="text/javascript">
+    document.getElementById("Posts").onclick = function () {
+        location.href = "{% url 'posts' %}";
+    };
+    document.getElementById("Create").onclick = function () {
+        location.href = "{% url 'create_a_post' %}";
+    };
+</script>
+{% endblock%}
